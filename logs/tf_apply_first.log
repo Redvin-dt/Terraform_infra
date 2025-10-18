@@ -1,0 +1,199 @@
+~/tmp/cloud_course/Terraform_infra (main*) » terraform apply                                                                                                                                     afonckinp@i113971340
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_disk.boot_disk will be created
+  + resource "yandex_compute_disk" "boot_disk" {
+      + block_size  = 4096
+      + created_at  = (known after apply)
+      + folder_id   = (known after apply)
+      + id          = (known after apply)
+      + image_id    = "fd8ba9d5mfvlncknt2kd"
+      + name        = "boot-disk"
+      + product_ids = (known after apply)
+      + size        = 15
+      + status      = (known after apply)
+      + type        = "network-hdd"
+      + zone        = "ru-central1-a"
+    }
+
+  # yandex_compute_instance.this will be created
+  + resource "yandex_compute_instance" "this" {
+      + allow_stopping_for_update = true
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + name                      = "linux-vm"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v3"
+      + status                    = (known after apply)
+      + zone                      = "ru-central1-d"
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+        }
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = false
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 4
+        }
+    }
+
+  # yandex_iam_service_account.bucket will be created
+  + resource "yandex_iam_service_account" "bucket" {
+      + created_at         = (known after apply)
+      + description        = (known after apply)
+      + folder_id          = (known after apply)
+      + id                 = (known after apply)
+      + name               = "bucket-sa"
+      + service_account_id = (known after apply)
+    }
+
+  # yandex_iam_service_account_static_access_key.this will be created
+  + resource "yandex_iam_service_account_static_access_key" "this" {
+      + access_key                   = (known after apply)
+      + created_at                   = (known after apply)
+      + description                  = "static access key for object storage"
+      + encrypted_secret_key         = (known after apply)
+      + id                           = (known after apply)
+      + key_fingerprint              = (known after apply)
+      + output_to_lockbox_version_id = (known after apply)
+      + secret_key                   = (sensitive value)
+      + service_account_id           = (known after apply)
+    }
+
+  # yandex_resourcemanager_folder_iam_member.storage_editor will be created
+  + resource "yandex_resourcemanager_folder_iam_member" "storage_editor" {
+      + folder_id = "b1gv152737jm47a15gut"
+      + member    = (known after apply)
+      + role      = "storage.editor"
+    }
+
+  # yandex_storage_bucket.this will be created
+  + resource "yandex_storage_bucket" "this" {
+      + access_key            = (known after apply)
+      + acl                   = (known after apply)
+      + bucket                = "test-s3-bucket-fm3oijfiwf3oro23dffoi32"
+      + bucket_domain_name    = (known after apply)
+      + default_storage_class = (known after apply)
+      + folder_id             = (known after apply)
+      + force_destroy         = false
+      + id                    = (known after apply)
+      + policy                = (known after apply)
+      + secret_key            = (sensitive value)
+      + website_domain        = (known after apply)
+      + website_endpoint      = (known after apply)
+    }
+
+  # yandex_vpc_network.this will be created
+  + resource "yandex_vpc_network" "this" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "private"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.private will be created
+  + resource "yandex_vpc_subnet" "private" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "private"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "192.168.10.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-d"
+    }
+
+  # yandex_ydb_database_serverless.this will be created
+  + resource "yandex_ydb_database_serverless" "this" {
+      + created_at            = (known after apply)
+      + database_path         = (known after apply)
+      + deletion_protection   = false
+      + document_api_endpoint = (known after apply)
+      + folder_id             = (known after apply)
+      + id                    = (known after apply)
+      + location_id           = "ru-central1"
+      + name                  = "test-ydb-serverless"
+      + sleep_after           = 0
+      + status                = (known after apply)
+      + tls_enabled           = (known after apply)
+      + ydb_api_endpoint      = (known after apply)
+      + ydb_full_endpoint     = (known after apply)
+    }
+
+Plan: 9 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.this: Creating...
+yandex_ydb_database_serverless.this: Creating...
+yandex_compute_disk.boot_disk: Creating...
+yandex_iam_service_account.bucket: Creating...
+yandex_iam_service_account.bucket: Creation complete after 2s [id=aje2gj6i36ok6i2cq0ld]
+yandex_iam_service_account_static_access_key.this: Creating...
+yandex_resourcemanager_folder_iam_member.storage_editor: Creating...
+yandex_iam_service_account_static_access_key.this: Creation complete after 1s [id=ajeslm2oqabcsgq6mtff]
+yandex_resourcemanager_folder_iam_member.storage_editor: Creation complete after 2s
+yandex_storage_bucket.this: Creating...
+yandex_compute_disk.boot_disk: Still creating... [10s elapsed]
+yandex_ydb_database_serverless.this: Still creating... [10s elapsed]
+yandex_compute_disk.boot_disk: Creation complete after 11s [id=fhmr7j20qmngn5bgq1dp]
+yandex_ydb_database_serverless.this: Still creating... [20s elapsed]
+yandex_ydb_database_serverless.this: Still creating... [30s elapsed]
+yandex_ydb_database_serverless.this: Still creating... [40s elapsed]
+yandex_ydb_database_serverless.this: Still creating... [50s elapsed]
+yandex_ydb_database_serverless.this: Creation complete after 54s [id=etnp40tkmqpm2l3bj3gv]
+╷
+│ Error: Error while requesting API to create network: client-request-id = 8f5e3ba4-3dc9-4b79-a066-3ce2eca7b354 client-trace-id = 73cb298a-f8d9-4cc0-ab47-e85b955f3afe rpc error: code = ResourceExhausted desc = Quota limit vpc.networks.count exceeded
+│
+│   with yandex_vpc_network.this,
+│   on main.tf line 2, in resource "yandex_vpc_network" "this":
+│    2: resource "yandex_vpc_network" "this" {
+│
+╵
+╷
+│ Error: error creating Storage S3 Bucket: failed to create bucket: BucketAlreadyExists: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+│ 	status code: 409, request id: 047f8ca001c68602, host id:
+│
+│   with yandex_storage_bucket.this,
+│   on main.tf line 60, in resource "yandex_storage_bucket" "this":
+│   60: resource "yandex_storage_bucket" "this" {
+│
+╵

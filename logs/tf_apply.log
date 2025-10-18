@@ -1,0 +1,55 @@
+~/tmp/cloud_course/Terraform_infra (main*) » terraform apply                                                                                                                                 1 ↵ afonckinp@i113971340
+yandex_vpc_network.this: Refreshing state... [id=enpac002tndq5sei7p70]
+yandex_iam_service_account.bucket: Refreshing state... [id=aje2gj6i36ok6i2cq0ld]
+yandex_compute_disk.boot_disk: Refreshing state... [id=fv4a4gr75329uq7d6vei]
+yandex_ydb_database_serverless.this: Refreshing state... [id=etnhrhb5c43s2p46lmvc]
+yandex_resourcemanager_folder_iam_member.storage_editor: Refreshing state...
+yandex_iam_service_account_static_access_key.this: Refreshing state... [id=ajeslm2oqabcsgq6mtff]
+yandex_vpc_subnet.private: Refreshing state... [id=fl8grucs7po5e286dujq]
+yandex_compute_instance.this: Refreshing state... [id=fv44mha9a1aur8gle8r1]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # yandex_iam_service_account.bucket will be updated in-place
+  ~ resource "yandex_iam_service_account" "bucket" {
+      ~ created_at         = "2025-10-18T08:36:50Z" -> (known after apply)
+        id                 = "aje2gj6i36ok6i2cq0ld"
+      ~ name               = "bucket-sa-test" -> "bucket-sa-asddasd"
+        # (2 unchanged attributes hidden)
+    }
+
+  # yandex_storage_bucket.this will be created
+  + resource "yandex_storage_bucket" "this" {
+      + access_key            = "YCAJErRRpOUiQ2sx-YWBDoH-R"
+      + acl                   = (known after apply)
+      + bucket                = "test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas"
+      + bucket_domain_name    = (known after apply)
+      + default_storage_class = (known after apply)
+      + folder_id             = (known after apply)
+      + force_destroy         = false
+      + id                    = (known after apply)
+      + policy                = (known after apply)
+      + secret_key            = (sensitive value)
+      + website_domain        = (known after apply)
+      + website_endpoint      = (known after apply)
+    }
+
+Plan: 1 to add, 1 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_iam_service_account.bucket: Modifying... [id=aje2gj6i36ok6i2cq0ld]
+yandex_storage_bucket.this: Creating...
+yandex_iam_service_account.bucket: Modifications complete after 1s [id=aje2gj6i36ok6i2cq0ld]
+yandex_storage_bucket.this: Still creating... [10s elapsed]
+yandex_storage_bucket.this: Creation complete after 13s [id=test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas]
+
+Apply complete! Resources: 1 added, 1 changed, 0 destroyed.

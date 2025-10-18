@@ -1,0 +1,87 @@
+~/tmp/cloud_course/Terraform_infra (main*) » terraform apply                                                                                                                                     afonckinp@i113971340
+yandex_iam_service_account.bucket: Refreshing state... [id=ajequ9vq43imud52952o]
+yandex_vpc_network.this: Refreshing state... [id=enp1o8imr6i3n63gn9kk]
+yandex_ydb_database_serverless.this: Refreshing state... [id=etn5om14si09psc1lg8f]
+yandex_compute_disk.boot_disk: Refreshing state... [id=fv4mcpdk35tfifuepb1h]
+yandex_resourcemanager_folder_iam_member.storage_editor: Refreshing state...
+yandex_iam_service_account_static_access_key.this: Refreshing state... [id=aje62vnf58cr11ehpcju]
+yandex_vpc_subnet.private: Refreshing state... [id=fl8gccq8q5uobga9q7nj]
+yandex_compute_instance.this: Refreshing state... [id=fv4m8fqc5i27h24i2dl7]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # random_string.bucket_name will be created
+  + resource "random_string" "bucket_name" {
+      + id          = (known after apply)
+      + length      = 8
+      + lower       = true
+      + min_lower   = 0
+      + min_numeric = 0
+      + min_special = 0
+      + min_upper   = 0
+      + number      = true
+      + numeric     = true
+      + result      = (known after apply)
+      + special     = false
+      + upper       = false
+    }
+
+  # yandex_compute_instance.this will be updated in-place
+  ~ resource "yandex_compute_instance" "this" {
+        id                        = "fv4m8fqc5i27h24i2dl7"
+        name                      = "linux-vm"
+        # (11 unchanged attributes hidden)
+
+      ~ resources {
+          ~ cores         = 2 -> 4
+          ~ memory        = 4 -> 8
+            # (2 unchanged attributes hidden)
+        }
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # yandex_storage_bucket.this will be created
+  + resource "yandex_storage_bucket" "this" {
+      + access_key            = "YCAJEa-TSuP6qlwma79BZMPL7"
+      + acl                   = (known after apply)
+      + bucket                = (known after apply)
+      + bucket_domain_name    = (known after apply)
+      + default_storage_class = (known after apply)
+      + folder_id             = (known after apply)
+      + force_destroy         = false
+      + id                    = (known after apply)
+      + policy                = (known after apply)
+      + secret_key            = (sensitive value)
+      + website_domain        = (known after apply)
+      + website_endpoint      = (known after apply)
+    }
+
+Plan: 2 to add, 1 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_string.bucket_name: Creating...
+random_string.bucket_name: Creation complete after 0s [id=5fxndtv9]
+yandex_storage_bucket.this: Creating...
+yandex_compute_instance.this: Modifying... [id=fv4m8fqc5i27h24i2dl7]
+yandex_storage_bucket.this: Still creating... [10s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 10s elapsed]
+yandex_storage_bucket.this: Creation complete after 12s [id=terraform-bucket-5fxndtv9]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 20s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 30s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 40s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 50s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 1m0s elapsed]
+yandex_compute_instance.this: Still modifying... [id=fv4m8fqc5i27h24i2dl7, 1m10s elapsed]
+yandex_compute_instance.this: Modifications complete after 1m10s [id=fv4m8fqc5i27h24i2dl7]
+
+Apply complete! Resources: 2 added, 1 changed, 0 destroyed.

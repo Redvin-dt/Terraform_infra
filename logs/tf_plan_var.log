@@ -1,0 +1,184 @@
+~/tmp/cloud_course/Terraform_infra (main*) » terraform plan                                                                                                                                  1 ↵ afonckinp@i113971340
+random_string.bucket_name: Refreshing state... [id=5fxndtv9]
+yandex_iam_service_account.bucket: Refreshing state... [id=ajequ9vq43imud52952o]
+yandex_vpc_network.this: Refreshing state... [id=enp1o8imr6i3n63gn9kk]
+yandex_ydb_database_serverless.this: Refreshing state... [id=etn5om14si09psc1lg8f]
+yandex_compute_disk.boot_disk: Refreshing state... [id=fv4mcpdk35tfifuepb1h]
+yandex_resourcemanager_folder_iam_member.storage_editor: Refreshing state...
+yandex_iam_service_account_static_access_key.this: Refreshing state... [id=aje62vnf58cr11ehpcju]
+yandex_vpc_subnet.private: Refreshing state... [id=fl8gccq8q5uobga9q7nj]
+yandex_storage_bucket.this: Refreshing state... [id=terraform-bucket-5fxndtv9]
+yandex_compute_instance.this: Refreshing state... [id=fv4m8fqc5i27h24i2dl7]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # yandex_compute_disk.boot_disk must be replaced
+-/+ resource "yandex_compute_disk" "boot_disk" {
+      ~ created_at  = "2025-10-18T09:00:44Z" -> (known after apply)
+      ~ folder_id   = "b1gv152737jm47a15gut" -> (known after apply)
+      ~ id          = "fv4mcpdk35tfifuepb1h" -> (known after apply)
+      - labels      = {} -> null
+        name        = "boot-disk"
+      ~ product_ids = [
+          - "f2esogi2vuuuj6uia832",
+        ] -> (known after apply)
+      ~ status      = "ready" -> (known after apply)
+      ~ type        = "network-hdd" -> "network-ssd" # forces replacement
+        # (4 unchanged attributes hidden)
+
+      - disk_placement_policy {}
+
+      - hardware_generation {
+          - legacy_features {
+              - pci_topology = "PCI_TOPOLOGY_V1" -> null
+            }
+        }
+    }
+
+  # yandex_compute_instance.this must be replaced
+-/+ resource "yandex_compute_instance" "this" {
+      ~ created_at                = "2025-10-18T09:00:52Z" -> (known after apply)
+      ~ folder_id                 = "b1gv152737jm47a15gut" -> (known after apply)
+      ~ fqdn                      = "fv4m8fqc5i27h24i2dl7.auto.internal" -> (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      ~ hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> (known after apply)
+      + hostname                  = (known after apply)
+      ~ id                        = "fv4m8fqc5i27h24i2dl7" -> (known after apply)
+      - labels                    = {} -> null
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      - metadata                  = {} -> null
+      ~ name                      = "linux-vm" -> "project-dev-linux-vm"
+      ~ status                    = "running" -> (known after apply)
+        # (4 unchanged attributes hidden)
+
+      ~ boot_disk {
+          ~ device_name = "fv4mcpdk35tfifuepb1h" -> (known after apply)
+          ~ disk_id     = "fv4mcpdk35tfifuepb1h" # forces replacement -> (known after apply) # forces replacement
+          ~ mode        = "READ_WRITE" -> (known after apply)
+            # (1 unchanged attribute hidden)
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8ba9d5mfvlncknt2kd" -> null
+              - name       = "boot-disk" -> null
+              - size       = 15 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      ~ network_interface {
+          ~ index              = 0 -> (known after apply)
+          ~ ip_address         = "192.168.10.21" -> (known after apply)
+          ~ ipv6               = false -> (known after apply)
+          + ipv6_address       = (known after apply)
+          ~ mac_address        = "d0:0d:16:43:f4:c2" -> (known after apply)
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          - security_group_ids = [] -> null
+            # (3 unchanged attributes hidden)
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+        }
+
+      ~ resources {
+          ~ cores         = 4 -> 2
+          - gpus          = 0 -> null
+          ~ memory        = 8 -> 2
+            # (1 unchanged attribute hidden)
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_iam_service_account.bucket will be updated in-place
+  ~ resource "yandex_iam_service_account" "bucket" {
+      ~ created_at         = "2025-10-18T09:00:44Z" -> (known after apply)
+        id                 = "ajequ9vq43imud52952o"
+      ~ name               = "bucket-sa-asddasd" -> "project-dev-bucket-sa"
+        # (2 unchanged attributes hidden)
+    }
+
+  # yandex_storage_bucket.this must be replaced
+-/+ resource "yandex_storage_bucket" "this" {
+      + acl                   = (known after apply)
+      ~ bucket                = "terraform-bucket-5fxndtv9" -> "project-dev-terraform-bucket-5fxndtv9" # forces replacement
+      ~ bucket_domain_name    = "terraform-bucket-5fxndtv9.storage.yandexcloud.net" -> (known after apply)
+      ~ default_storage_class = "STANDARD" -> (known after apply)
+      ~ folder_id             = "b1gv152737jm47a15gut" -> (known after apply)
+      ~ id                    = "terraform-bucket-5fxndtv9" -> (known after apply)
+      - max_size              = 0 -> null
+      + policy                = (known after apply)
+      - tags                  = {} -> null
+      + website_domain        = (known after apply)
+      + website_endpoint      = (known after apply)
+        # (3 unchanged attributes hidden)
+
+      - anonymous_access_flags {
+          - config_read = false -> null
+          - list        = false -> null
+          - read        = false -> null
+        }
+
+      - versioning {
+          - enabled = false -> null
+        }
+    }
+
+  # yandex_vpc_network.this will be updated in-place
+  ~ resource "yandex_vpc_network" "this" {
+        id                        = "enp1o8imr6i3n63gn9kk"
+      ~ name                      = "private" -> "project-dev-private"
+        # (5 unchanged attributes hidden)
+    }
+
+  # yandex_vpc_subnet.private will be updated in-place
+  ~ resource "yandex_vpc_subnet" "private" {
+        id             = "fl8gccq8q5uobga9q7nj"
+      ~ name           = "private" -> "project-dev-subnet"
+      ~ v4_cidr_blocks = [
+          - "192.168.10.0/24",
+          + "192.168.11.0/24",
+        ]
+        # (6 unchanged attributes hidden)
+    }
+
+  # yandex_ydb_database_serverless.this will be updated in-place
+  ~ resource "yandex_ydb_database_serverless" "this" {
+        id                    = "etn5om14si09psc1lg8f"
+      ~ name                  = "test-ydb-serverless" -> "project-dev-ydb-serverless"
+        # (12 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 3 to add, 4 to change, 3 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.

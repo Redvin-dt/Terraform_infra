@@ -1,0 +1,252 @@
+~/tmp/cloud_course/Terraform_infra (main*) » terraform destroy                                                                                                                                   afonckinp@i113971340
+yandex_vpc_network.this: Refreshing state... [id=enpac002tndq5sei7p70]
+yandex_iam_service_account.bucket: Refreshing state... [id=aje2gj6i36ok6i2cq0ld]
+yandex_ydb_database_serverless.this: Refreshing state... [id=etnhrhb5c43s2p46lmvc]
+yandex_compute_disk.boot_disk: Refreshing state... [id=fv4a4gr75329uq7d6vei]
+yandex_resourcemanager_folder_iam_member.storage_editor: Refreshing state...
+yandex_iam_service_account_static_access_key.this: Refreshing state... [id=ajeslm2oqabcsgq6mtff]
+yandex_storage_bucket.this: Refreshing state... [id=test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas]
+yandex_vpc_subnet.private: Refreshing state... [id=fl8grucs7po5e286dujq]
+yandex_compute_instance.this: Refreshing state... [id=fv44mha9a1aur8gle8r1]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_disk.boot_disk will be destroyed
+  - resource "yandex_compute_disk" "boot_disk" {
+      - block_size  = 4096 -> null
+      - created_at  = "2025-10-18T08:47:26Z" -> null
+      - folder_id   = "b1gv152737jm47a15gut" -> null
+      - id          = "fv4a4gr75329uq7d6vei" -> null
+      - image_id    = "fd8ba9d5mfvlncknt2kd" -> null
+      - labels      = {} -> null
+      - name        = "boot-disk" -> null
+      - product_ids = [
+          - "f2esogi2vuuuj6uia832",
+        ] -> null
+      - size        = 15 -> null
+      - status      = "ready" -> null
+      - type        = "network-hdd" -> null
+      - zone        = "ru-central1-d" -> null
+
+      - disk_placement_policy {}
+
+      - hardware_generation {
+          - legacy_features {
+              - pci_topology = "PCI_TOPOLOGY_V1" -> null
+            }
+        }
+    }
+
+  # yandex_compute_instance.this will be destroyed
+  - resource "yandex_compute_instance" "this" {
+      - allow_stopping_for_update = true -> null
+      - created_at                = "2025-10-18T08:47:34Z" -> null
+      - folder_id                 = "b1gv152737jm47a15gut" -> null
+      - fqdn                      = "fv44mha9a1aur8gle8r1.auto.internal" -> null
+      - hardware_generation       = [
+          - {
+              - generation2_features = []
+              - legacy_features      = [
+                  - {
+                      - pci_topology = "PCI_TOPOLOGY_V1"
+                    },
+                ]
+            },
+        ] -> null
+      - id                        = "fv44mha9a1aur8gle8r1" -> null
+      - labels                    = {} -> null
+      - metadata                  = {} -> null
+      - name                      = "linux-vm" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v3" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-d" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "fv4a4gr75329uq7d6vei" -> null
+          - disk_id     = "fv4a4gr75329uq7d6vei" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8ba9d5mfvlncknt2kd" -> null
+              - name       = "boot-disk" -> null
+              - size       = 15 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.10.7" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:4b:45:49:50" -> null
+          - nat                = false -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "fl8grucs7po5e286dujq" -> null
+        }
+
+      - placement_policy {
+          - host_affinity_rules       = [] -> null
+          - placement_group_partition = 0 -> null
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 4 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_iam_service_account.bucket will be destroyed
+  - resource "yandex_iam_service_account" "bucket" {
+      - created_at         = "2025-10-18T08:36:50Z" -> null
+      - folder_id          = "b1gv152737jm47a15gut" -> null
+      - id                 = "aje2gj6i36ok6i2cq0ld" -> null
+      - name               = "bucket-sa-asddasd" -> null
+      - service_account_id = "aje2gj6i36ok6i2cq0ld" -> null
+    }
+
+  # yandex_iam_service_account_static_access_key.this will be destroyed
+  - resource "yandex_iam_service_account_static_access_key" "this" {
+      - access_key         = "YCAJErRRpOUiQ2sx-YWBDoH-R" -> null
+      - created_at         = "2025-10-18T08:36:52Z" -> null
+      - description        = "static access key for object storage" -> null
+      - id                 = "ajeslm2oqabcsgq6mtff" -> null
+      - secret_key         = (sensitive value) -> null
+      - service_account_id = "aje2gj6i36ok6i2cq0ld" -> null
+    }
+
+  # yandex_resourcemanager_folder_iam_member.storage_editor will be destroyed
+  - resource "yandex_resourcemanager_folder_iam_member" "storage_editor" {
+      - folder_id = "b1gv152737jm47a15gut" -> null
+      - member    = "serviceAccount:aje2gj6i36ok6i2cq0ld" -> null
+      - role      = "storage.editor" -> null
+    }
+
+  # yandex_storage_bucket.this will be destroyed
+  - resource "yandex_storage_bucket" "this" {
+      - access_key            = "YCAJErRRpOUiQ2sx-YWBDoH-R" -> null
+      - bucket                = "test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas" -> null
+      - bucket_domain_name    = "test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas.storage.yandexcloud.net" -> null
+      - default_storage_class = "STANDARD" -> null
+      - folder_id             = "b1gv152737jm47a15gut" -> null
+      - force_destroy         = false -> null
+      - id                    = "test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas" -> null
+      - max_size              = 0 -> null
+      - secret_key            = (sensitive value) -> null
+      - tags                  = {} -> null
+
+      - anonymous_access_flags {
+          - config_read = false -> null
+          - list        = false -> null
+          - read        = false -> null
+        }
+
+      - versioning {
+          - enabled = false -> null
+        }
+    }
+
+  # yandex_vpc_network.this will be destroyed
+  - resource "yandex_vpc_network" "this" {
+      - created_at                = "2025-10-18T08:44:25Z" -> null
+      - default_security_group_id = "enplh8cpm2mcct102sd2" -> null
+      - folder_id                 = "b1gv152737jm47a15gut" -> null
+      - id                        = "enpac002tndq5sei7p70" -> null
+      - labels                    = {} -> null
+      - name                      = "private" -> null
+      - subnet_ids                = [
+          - "fl8grucs7po5e286dujq",
+        ] -> null
+    }
+
+  # yandex_vpc_subnet.private will be destroyed
+  - resource "yandex_vpc_subnet" "private" {
+      - created_at     = "2025-10-18T08:44:28Z" -> null
+      - folder_id      = "b1gv152737jm47a15gut" -> null
+      - id             = "fl8grucs7po5e286dujq" -> null
+      - labels         = {} -> null
+      - name           = "private" -> null
+      - network_id     = "enpac002tndq5sei7p70" -> null
+      - v4_cidr_blocks = [
+          - "192.168.10.0/24",
+        ] -> null
+      - v6_cidr_blocks = [] -> null
+      - zone           = "ru-central1-d" -> null
+    }
+
+  # yandex_ydb_database_serverless.this will be destroyed
+  - resource "yandex_ydb_database_serverless" "this" {
+      - created_at            = "2025-10-18T08:47:26Z" -> null
+      - database_path         = "/ru-central1/b1g93tik9db1ma5bkile/etnhrhb5c43s2p46lmvc" -> null
+      - deletion_protection   = false -> null
+      - document_api_endpoint = "https://docapi.serverless.yandexcloud.net/ru-central1/b1g93tik9db1ma5bkile/etnhrhb5c43s2p46lmvc" -> null
+      - folder_id             = "b1gv152737jm47a15gut" -> null
+      - id                    = "etnhrhb5c43s2p46lmvc" -> null
+      - labels                = {} -> null
+      - location_id           = "ru-central1" -> null
+      - name                  = "test-ydb-serverless" -> null
+      - sleep_after           = 0 -> null
+      - status                = "RUNNING" -> null
+      - tls_enabled           = true -> null
+      - ydb_api_endpoint      = "ydb.serverless.yandexcloud.net:2135" -> null
+      - ydb_full_endpoint     = "grpcs://ydb.serverless.yandexcloud.net:2135/?database=/ru-central1/b1g93tik9db1ma5bkile/etnhrhb5c43s2p46lmvc" -> null
+
+      - serverless_database {
+          - enable_throttling_rcu_limit = false -> null
+          - provisioned_rcu_limit       = 0 -> null
+          - storage_size_limit          = 50 -> null
+          - throttling_rcu_limit        = 0 -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 9 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+yandex_ydb_database_serverless.this: Destroying... [id=etnhrhb5c43s2p46lmvc]
+yandex_storage_bucket.this: Destroying... [id=test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas]
+yandex_compute_instance.this: Destroying... [id=fv44mha9a1aur8gle8r1]
+yandex_ydb_database_serverless.this: Destruction complete after 8s
+yandex_storage_bucket.this: Still destroying... [id=test-s3-bucket-fm3oijfiwf3oro23dffoi32asddas, 10s elapsed]
+yandex_compute_instance.this: Still destroying... [id=fv44mha9a1aur8gle8r1, 10s elapsed]
+yandex_storage_bucket.this: Destruction complete after 11s
+yandex_resourcemanager_folder_iam_member.storage_editor: Destroying...
+yandex_iam_service_account_static_access_key.this: Destroying... [id=ajeslm2oqabcsgq6mtff]
+yandex_iam_service_account_static_access_key.this: Destruction complete after 0s
+yandex_resourcemanager_folder_iam_member.storage_editor: Destruction complete after 3s
+yandex_iam_service_account.bucket: Destroying... [id=aje2gj6i36ok6i2cq0ld]
+yandex_iam_service_account.bucket: Destruction complete after 3s
+yandex_compute_instance.this: Still destroying... [id=fv44mha9a1aur8gle8r1, 20s elapsed]
+yandex_compute_instance.this: Still destroying... [id=fv44mha9a1aur8gle8r1, 30s elapsed]
+yandex_compute_instance.this: Destruction complete after 34s
+yandex_vpc_subnet.private: Destroying... [id=fl8grucs7po5e286dujq]
+yandex_compute_disk.boot_disk: Destroying... [id=fv4a4gr75329uq7d6vei]
+yandex_compute_disk.boot_disk: Destruction complete after 0s
+yandex_vpc_subnet.private: Destruction complete after 3s
+yandex_vpc_network.this: Destroying... [id=enpac002tndq5sei7p70]
+yandex_vpc_network.this: Destruction complete after 0s
+
+Destroy complete! Resources: 9 destroyed.
